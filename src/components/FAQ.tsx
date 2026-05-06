@@ -62,11 +62,7 @@ export function FAQ() {
         <div className="lg:col-span-8">
           <Accordion type="single" collapsible className="w-full">
             {FAQS.map((f, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="border-b border-border"
-              >
+              <AccordionItem key={i} value={`item-${i}`} className="border-b border-border">
                 <AccordionTrigger className="text-left font-display text-xl md:text-xl font-medium hover:text-ember hover:no-underline py-6 uppercase tracking-wide">
                   <span className="flex items-baseline gap-5">
                     <span className="text-[20px] text-ember tracking-widest">

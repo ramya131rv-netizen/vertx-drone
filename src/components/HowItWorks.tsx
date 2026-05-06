@@ -31,7 +31,7 @@ export function HowItWorks() {
       none: [],
       grayscale: ["#ffffff", "#999999", "#333333"],
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -98,7 +98,10 @@ export function HowItWorks() {
       if (cfg.pulseEffect) {
         const animR = document.createElementNS(svgNS, "animate");
         animR.setAttribute("attributeName", "r");
-        animR.setAttribute("values", `${DOT * cfg.sizeMin};${DOT * cfg.sizeMax};${DOT * cfg.sizeMin}`);
+        animR.setAttribute(
+          "values",
+          `${DOT * cfg.sizeMin};${DOT * cfg.sizeMax};${DOT * cfg.sizeMin}`,
+        );
         animR.setAttribute("dur", `${cfg.duration}s`);
         animR.setAttribute("begin", `${(frac * cfg.duration).toFixed(3)}s`);
         animR.setAttribute("repeatCount", "indefinite");
@@ -139,11 +142,41 @@ export function HowItWorks() {
   }
 
   const features = [
-    { title: "Plan", blurb: "A safe flight zone and the best viewing spots are confirmed. Permissions are secured, and we collaborate with you to ensure full compliance.", meta: "T-14 Days", image: planImg },
-    { title: "Design", blurb: "Once the show concept is approved, our creative team crafts custom animations, programs drone movements, and mixes synchronous audio.", meta: "T-7 Days", image: designImg },
-    { title: "Arrival & Assembly", blurb: "The equipment and operations team arrive on-site. We begin preparations for the actual deployment of the drone fleet.", meta: "T-2 Days", image: assemblyImg },
-    { title: "Set Up & Final Checks", blurb: "Final safety checks and multiple test flights are conducted to ensure flawless execution on show night.", meta: "T-1 Day", image: setupImg },
-    { title: "The Grand Finale", blurb: "The big day! The sky comes alive as your vision takes flight—literally. A breathtaking live drone light show.", meta: "Showtime", image: finalImg },
+    {
+      title: "Plan",
+      blurb:
+        "A safe flight zone and the best viewing spots are confirmed. Permissions are secured, and we collaborate with you to ensure full compliance.",
+      meta: "T-14 Days",
+      image: planImg,
+    },
+    {
+      title: "Design",
+      blurb:
+        "Once the show concept is approved, our creative team crafts custom animations, programs drone movements, and mixes synchronous audio.",
+      meta: "T-7 Days",
+      image: designImg,
+    },
+    {
+      title: "Arrival & Assembly",
+      blurb:
+        "The equipment and operations team arrive on-site. We begin preparations for the actual deployment of the drone fleet.",
+      meta: "T-2 Days",
+      image: assemblyImg,
+    },
+    {
+      title: "Set Up & Final Checks",
+      blurb:
+        "Final safety checks and multiple test flights are conducted to ensure flawless execution on show night.",
+      meta: "T-1 Day",
+      image: setupImg,
+    },
+    {
+      title: "The Grand Finale",
+      blurb:
+        "The big day! The sky comes alive as your vision takes flight—literally. A breathtaking live drone light show.",
+      meta: "Showtime",
+      image: finalImg,
+    },
   ];
 
   const spans = [
@@ -159,9 +192,7 @@ export function HowItWorks() {
       {/* Azure Depths */}
       <div
         className="absolute inset-0 z-0"
-        style={{
-          background: "radial-gradient(125% 125% at 50% 10%, rgba(0,0,0,0) 40%, rgba(1,1,51,0.5) 100%)",
-        }}
+    
       />
 
       <section className="relative mx-auto max-w-7xl px-6 py-20 text-white">
@@ -186,13 +217,20 @@ export function HowItWorks() {
                 Every step is carefully crafted.
               </p>
             </div>
-
           </div>
         </header>
 
         <div className="relative grid grid-cols-1 gap-4 md:grid-cols-6 auto-rows-[minmax(180px,auto)]">
           {features.map((f, i) => (
-            <BentoCard key={i} span={spans[i]} title={f.title} blurb={f.blurb} meta={f.meta} index={i} image={f.image} />
+            <BentoCard
+              key={i}
+              span={spans[i]}
+              title={f.title}
+              blurb={f.blurb}
+              meta={f.meta}
+              index={i}
+              image={f.image}
+            />
           ))}
         </div>
 
@@ -201,7 +239,10 @@ export function HowItWorks() {
           <Button className="bg-ember text-white hover:bg-ember/90 rounded-full px-10 py-6 text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,100,50,0.3)] hover:shadow-[0_0_30px_rgba(255,100,50,0.5)] transition-all">
             Start Your Drone Show
           </Button>
-          <a href="#" className="flex items-center text-xs uppercase tracking-wider text-white/50 hover:text-white transition-colors gap-2">
+          <a
+            href="#"
+            className="flex items-center text-xs uppercase tracking-wider text-white/50 hover:text-white transition-colors gap-2"
+          >
             <MessageCircle className="w-4 h-4" /> WhatsApp quick connect
           </a>
         </footer>
@@ -210,7 +251,21 @@ export function HowItWorks() {
   );
 }
 
-function BentoCard({ span = "", title, blurb, meta, index, image }: { span?: string, title: string, blurb: string, meta: string, index: number, image: string }) {
+function BentoCard({
+  span = "",
+  title,
+  blurb,
+  meta,
+  index,
+  image,
+}: {
+  span?: string;
+  title: string;
+  blurb: string;
+  meta: string;
+  index: number;
+  image: string;
+}) {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -229,7 +284,11 @@ function BentoCard({ span = "", title, blurb, meta, index, image }: { span?: str
       className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm p-6 md:p-8 transition-colors duration-300 hover:border-white/30 flex flex-col justify-between ${span}`}
     >
       {/* Background Image & Gradient Overlay */}
-      <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105 transform-gpu" />
+      <img
+        src={image}
+        alt={title}
+        className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105 transform-gpu"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
 
       <header className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4 relative z-10">
@@ -253,7 +312,9 @@ function BentoCard({ span = "", title, blurb, meta, index, image }: { span?: str
       <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
         <div
           className="absolute -inset-1 rounded-2xl border border-ember/50"
-          style={{ maskImage: `radial-gradient(250px_250px_at_${mousePos.x}%_${mousePos.y}%, white, transparent)` }}
+          style={{
+            maskImage: `radial-gradient(250px_250px_at_${mousePos.x}%_${mousePos.y}%, white, transparent)`,
+          }}
         />
       </div>
     </article>
