@@ -4,6 +4,7 @@ import * as React from "react";
 import { Building2, Heart, Music, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import corp from "@/assets/show-corporate.jpg";
+import corpVideo from "@/assets/show-corporate.webm";
 import wed from "@/assets/show-wedding.jpg";
 import fest from "@/assets/show-festival.jpg";
 import sport from "@/assets/show-sports.jpg";
@@ -13,6 +14,7 @@ export interface CardItem {
   title: string;
   description: string;
   imgSrc: string;
+  videoSrc?: string;
   icon?: React.ReactNode;
   linkHref: string;
 }
@@ -21,6 +23,35 @@ interface ExpandingCardsProps extends React.HTMLAttributes<HTMLUListElement> {
   items: CardItem[];
   defaultActiveIndex?: number;
 }
+
+const CardVideo = ({ src, isActive }: { src: string; isActive: boolean }) => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    if (isActive) {
+      videoRef.current?.play().catch(() => {});
+    } else {
+      videoRef.current?.pause();
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+      }
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      muted
+      loop
+      playsInline
+      className={cn(
+        "absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out",
+        isActive ? "opacity-100 scale-100" : "opacity-0 scale-110"
+      )}
+    />
+  );
+};
 
 export const ExpandingCards = React.forwardRef<
   HTMLUListElement,
@@ -100,6 +131,7 @@ export const ExpandingCards = React.forwardRef<
             alt={item.title}
             className="absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out group-data-[active=true]:scale-100 group-data-[active=true]:grayscale-0 scale-110 grayscale"
           />
+          {item.videoSrc && <CardVideo src={item.videoSrc} isActive={activeIndex === index} />}
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-500 group-data-[active=true]:opacity-80" />
 
           <article
@@ -134,6 +166,7 @@ const ZONES: CardItem[] = [
     title: "Corporate",
     description: "Brand reveals, IPOs, product launches.",
     imgSrc: corp,
+    videoSrc: corpVideo,
     linkHref: "#"
   },
   {
